@@ -1,13 +1,42 @@
-import { useState } from "react";
-import "./App.css";
+import React from 'react';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
-function App() {
+gsap.registerPlugin(useGSAP);
+
+export default function Boxes() {
+  const container = useRef();
+  const tl = useRef();
+
+  const toggleTimeline = () => {
+    tl.current.reversed(!tl.current.reversed());
+  };
+
+  useGSAP(
+    () => {
+      const boxes = gsap.utils.toArray('.box');
+      tl.current = gsap
+        .timeline()
+        .to(boxes[0], { x: 120, rotation: 360 })
+        .to(boxes[1], { x: -120, rotation: -360 }, '<')
+        .to(boxes[2], { y: -166 })
+        .reverse();
+    },
+    { scope: container }
+  );
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline text-blue-800">Hello world!</h1>
-    </>
+    <main>
+      <section className="boxes-container" ref={container}>
+        <h2 className='tw-text-red-700'>Use the button to toggle a Timeline</h2>
+        <div>
+          <button onClick={toggleTimeline}>Toggle Timeline</button>
+        </div>
+        <div className="box gradient-blue ">Box 1</div>
+        <div className="box gradient-blue">Box 2</div>
+        <div className="box gradient-blue">Box 3</div>
+      </section>
+    </main>
   );
 }
-
-export default App;
