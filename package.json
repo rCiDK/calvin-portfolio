@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "calvin-portfolio": "file:",
     "gsap": "^3.12.5",
+    "pace-js": "^1.2.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

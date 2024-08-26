@@ -1,42 +1,52 @@
-import React from 'react';
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import React, { useEffect, useRef } from 'react';
+import Pace from 'pace-js';
+import { gsap } from 'gsap';
+import './index.css';
 
-gsap.registerPlugin(useGSAP);
+const App = () => {
+  const loadingTextRef = useRef(null);
 
-export default function Boxes() {
-  const container = useRef();
-  const tl = useRef();
+  useEffect(() => {
+    Pace.start({
+      ajax: true,
+      document: true
+    });
 
-  const toggleTimeline = () => {
-    tl.current.reversed(!tl.current.reversed());
-  };
+    // Split the text into individual span elements
+    const loadingText = loadingTextRef.current;
+    const letters = loadingText.textContent.split('');
+    loadingText.textContent = '';
+    letters.forEach((letter) => {
+      const span = document.createElement('span');
+      span.textContent = letter;
+      loadingText.appendChild(span);
+    });
 
-  useGSAP(
-    () => {
-      const boxes = gsap.utils.toArray('.box');
-      tl.current = gsap
-        .timeline()
-        .to(boxes[0], { x: 120, rotation: 360 })
-        .to(boxes[1], { x: -120, rotation: -360 }, '<')
-        .to(boxes[2], { y: -166 })
-        .reverse();
-    },
-    { scope: container }
-  );
+    Pace.on('done', () => {
+      gsap.timeline()
+        .add('p')
+        .to('.pace', { transform: 'scale(10, 1)', duration: 4 , ease: "power4.out"}, "+=.2")
+        .to('.pace', { duration: 1, height: "100%", ease: "power4.out" }, "-=3.1")
+        .to('.loading__text span', { 
+          delay: 0.2, 
+          duration: 0.5, 
+          opacity: 0, 
+          y: -100,
+          stagger: 0.1,
+          ease: "power4.out"
+        }, 'p')
+        .to('.title', { duration: 2, y: -10, opacity: 1, ease: "expo.inOut" }, '-=3');
+    });
+  }, []);
 
   return (
-    <main>
-      <section className="boxes-container" ref={container}>
-        <h2 className='tw-text-red-700'>Use the button to toggle a Timeline</h2>
-        <div>
-          <button onClick={toggleTimeline}>Toggle Timeline</button>
-        </div>
-        <div className="box gradient-blue ">Box 1</div>
-        <div className="box gradient-blue">Box 2</div>
-        <div className="box gradient-blue">Box 3</div>
-      </section>
-    </main>
+    <>
+      <h1 className="title">Hi</h1>
+      <div id="preloader">
+        <div className="loading__text" ref={loadingTextRef}>LOADING</div>
+      </div>
+    </>
   );
-}
+};
+
+export default App;
