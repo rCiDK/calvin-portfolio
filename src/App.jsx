@@ -25,8 +25,26 @@ const App = () => {
     Pace.on('done', () => {
       gsap.timeline()
         .add('p')
-        .to('.pace', { transform: 'scale(10, 1)', duration: 4 , ease: "power4.out"}, "+=.2")
-        .to('.pace', { duration: 1, height: "100%", ease: "power4.out" }, "-=3.1")
+        .to('.pace', { 
+          transform: 'scale(10, 1)', 
+          duration: 4, 
+          ease: "power4.out" 
+        }, "+=.2")
+        // .to('.pace', { 
+        //   rotate: 45, 
+        //   duration: 0.5, 
+        //   ease: "power4.out" 
+        // }, "+=1")
+        .to('.pace', { 
+          duration: 1, 
+          rotate: 15,
+          ease: "power4.out" 
+        }, "-=3.1")
+        .to('.pace', { 
+          duration: 1, 
+          height: "100%", 
+          ease: "power4.out" 
+        }, "-=3.1")
         .to('.loading__text span', { 
           delay: 0.2, 
           duration: 0.5, 
