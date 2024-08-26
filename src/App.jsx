@@ -30,11 +30,6 @@ const App = () => {
           duration: 4, 
           ease: "power4.out" 
         }, "+=.2")
-        // .to('.pace', { 
-        //   rotate: 45, 
-        //   duration: 0.5, 
-        //   ease: "power4.out" 
-        // }, "+=1")
         .to('.pace', { 
           duration: 1, 
           rotate: 15,
