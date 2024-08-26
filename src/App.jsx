@@ -2,6 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import Pace from 'pace-js';
 import { gsap } from 'gsap';
 import './index.css';
+import { CustomEase } from "gsap/CustomEase";
+
+
+gsap.registerPlugin(CustomEase);
 
 const App = () => {
   const loadingTextRef = useRef(null);
@@ -48,13 +52,16 @@ const App = () => {
           stagger: 0.1,
           ease: "power4.out"
         }, 'p')
-        .to('.title', { duration: 2, y: -10, opacity: 1, ease: "expo.inOut" }, '-=3');
+        .to('.title', { duration: 1, opacity: 1 }, '-=3')
+        .to('.title', { duration: 2.5, x: -1280, ease: CustomEase.create("custom", "M0,0 C0.419,0.019 0.473,0.449 0.527,0.567 0.578,0.681 0.62,1 1,1 ") }, '-=2.7');
     });
   }, []);
 
   return (
     <>
-      <h1 className="title">Hi</h1>
+      <div id='title-container'>
+        <h1 className="title">Halo • नमस्ते • こんにちは • สวัสดี • Olá • Hola • Salut • Привет • Ciao • Hello</h1>
+      </div>
       <div id="preloader">
         <div className="loading__text" ref={loadingTextRef}>LOADING</div>
       </div>

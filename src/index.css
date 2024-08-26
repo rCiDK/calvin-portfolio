@@ -12,12 +12,20 @@ body {
 }
 
 .title {
-  position: absolute;
-  top: 42%;
-  left: 50%;
+  transform: translateX(100%);
+  position: relative;
   color: #101010;
-  z-index: 99999;
   opacity: 0;
+  font-size: 300px;
+  white-space: nowrap;
+}
+
+#title-container {
+  z-index: 99999;
+  position: absolute;
+  top: 130%;
+  left: 50%;
+  transform: rotate(15deg);
 }
 
 #preloader {
