@@ -14,18 +14,27 @@ body {
 .title {
   transform: translateX(100%);
   position: relative;
-  color: #101010;
+  color: #000000;
   opacity: 0;
-  font-size: 300px;
+  font-size: 20vh;
+  white-space: nowrap;
+}
+
+.helloTitle{
+  position: absolute;
+  color: white;
+  left: 40%;
+  opacity: 0;
+  font-size: 20vh;
   white-space: nowrap;
 }
 
 #title-container {
+  width: 100%;
   z-index: 99999;
   position: absolute;
-  top: 130%;
-  left: 50%;
-  transform: rotate(15deg);
+  top: 35%;
+  overflow: hidden;
 }
 
 #preloader {
