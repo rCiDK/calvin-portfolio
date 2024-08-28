@@ -48,7 +48,7 @@ const App = () => {
           ease: "power4.out"
         }, 'p')
         .to('.title', { duration: 1, opacity: 1 }, '-=3')
-        .to('.title', { duration: 2.5, xPercent: -345, ease: CustomEase.create("custom", "M0,0 C0.419,0.019 0.473,0.449 0.527,0.567 0.578,0.681 0.62,1 1,1 ") }, '-=2.7')
+        .to('.title', { duration: 2.5, xPercent: -370, ease: CustomEase.create("custom", "M0,0 C0.419,0.019 0.473,0.449 0.527,0.567 0.578,0.681 0.62,1 1,1 ") }, '-=2.7')
         .to('.pace', { 
           duration: 1, 
           height: "0%",
