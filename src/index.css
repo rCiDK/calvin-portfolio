@@ -29,7 +29,34 @@ body {
   white-space: nowrap;
 }
 
+.showTitle span{
+  color: white;
+  left: 100%;
+  opacity: 0;
+  font-size: 8vw;
+  white-space: nowrap;
+  z-index: 99998;
+}
+
 #title-container {
+  width: 100%;
+  z-index: 99999;
+  position: absolute;
+  top: 35%;
+  overflow: hidden;
+}
+
+#title-container2 {
+  text-align: center;
+  width: 100%;
+  z-index: 99999;
+  position: absolute;
+  top: 35%;
+  overflow: hidden;
+}
+
+#title-container3 {
+  text-align: center;
   width: 100%;
   z-index: 99999;
   position: absolute;
@@ -45,6 +72,15 @@ body {
   display: grid;
   align-items: center;
   justify-content: center;
+}
+
+.nameTitle span{
+  color: white;
+  left: 100%;
+  opacity: 0;
+  font-size: 8vw;
+  white-space: nowrap;
+  z-index: 99998;
 }
 
 .loading__text {
