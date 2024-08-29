@@ -4,11 +4,12 @@ import { gsap } from 'gsap';
 import './index.css';
 import { CustomEase } from "gsap/CustomEase";
 
-
 gsap.registerPlugin(CustomEase);
 
 const App = () => {
   const loadingTextRef = useRef(null);
+  const nameTitleRef = useRef(null);
+  const showTitleRef = useRef(null);
 
   useEffect(() => {
     Pace.start({
@@ -24,6 +25,18 @@ const App = () => {
       const span = document.createElement('span');
       span.textContent = letter;
       loadingText.appendChild(span);
+    });
+
+    // Split the nameTitle and showTitle into words
+    [nameTitleRef, showTitleRef].forEach((ref) => {
+      const element = ref.current;
+      const words = element.textContent.split(' ');
+      element.textContent = '';
+      words.forEach((word) => {
+        const span = document.createElement('span');
+        span.textContent = word + ' ';
+        element.appendChild(span);
+      });
     });
 
     Pace.on('done', () => {
@@ -64,7 +77,37 @@ const App = () => {
           duration: 1, 
           opacity: 0, 
           ease: "power4.in" 
-        }, "-=1");
+        }, "-=1")
+        .to('.helloTitle', { 
+          duration: 0.5, 
+          opacity: 0,
+          y: 15, 
+          ease: "power4.in" 
+        }, "+=0")
+        .to('.nameTitle span', {
+          duration: 0.5,
+          opacity: 1,
+          stagger: 0.2,
+          ease: "power4.out"
+        }, "+=0.4")
+        .to('.nameTitle span', {
+          duration: 0.5,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power4.out"
+        }, "+=0.4")
+        .to('.showTitle span', {
+          duration: 0.5,
+          opacity: 1,
+          stagger: 0.2,
+          ease: "power4.out"
+        }, "+=0.5")
+        .to('.showTitle span', {
+          duration: 0.5,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power4.out"
+        }, "+=0.5");
     });
   }, []);
 
@@ -73,6 +116,12 @@ const App = () => {
       <div id='title-container'>
         <h1 className='helloTitle'>Hello</h1>
         <h1 className="title">Halo • नमस्ते • こんにちは • สวัสดี • Olá • Hola • Salut • Привет • Ciao • Hello</h1>
+      </div>
+      <div id='title-container2'>
+        <h1 className='nameTitle' ref={nameTitleRef}>My Name Is Calvin</h1>
+      </div>
+      <div id='title-container3'>
+        <h1 className='showTitle' ref={showTitleRef}>These Are My Projects</h1>
       </div>
       <div id="preloader">
         <div className="loading__text" ref={loadingTextRef}>LOADING</div>
