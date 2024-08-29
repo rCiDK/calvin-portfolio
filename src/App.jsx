@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Pace from 'pace-js';
 import { gsap } from 'gsap';
 import './index.css';
@@ -10,6 +10,7 @@ const App = () => {
   const loadingTextRef = useRef(null);
   const nameTitleRef = useRef(null);
   const showTitleRef = useRef(null);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
     Pace.start({
@@ -112,7 +113,8 @@ const App = () => {
           duration: 0.5,
           opacity: 1,
           y: -20,
-          ease: "power4.out"
+          ease: "power4.out",
+          onComplete: () => setIsButtonVisible(true)
         }, "+=0.5");
     });
   }, []);
@@ -139,22 +141,27 @@ const App = () => {
       <button 
         className="portfolio-button"
         onClick={handlePortfolioClick}
+        disabled={!isButtonVisible}
         style={{
           position: 'absolute',
           bottom: '20px',
           left: '50%',
           transform: 'translateX(-50%)',
           padding: '10px 20px',
-          fontSize: '16px',
-          backgroundColor: '#4CAF50',
+          height: '100vh',
+          width: '100%',
+          backgroundColor: '#00000',
           color: 'white',
           border: 'none',
           borderRadius: '5px',
-          cursor: 'pointer',
           opacity: 0,
+          zIndex: 99999,
+          cursor: isButtonVisible ? 'pointer' : 'default',
+          fontFamily: '"Helvetica Neue", Sans-serif',
+          fontSize: '1vw',
         }}
       >
-        View Portfolio
+        Click Anywhere
       </button>
     </>
   );
