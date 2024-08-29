@@ -107,9 +107,19 @@ const App = () => {
           opacity: 0,
           stagger: 0.05,
           ease: "power4.out"
+        }, "+=0.5")
+        .to('.portfolio-button', {
+          duration: 0.5,
+          opacity: 1,
+          y: -20,
+          ease: "power4.out"
         }, "+=0.5");
     });
   }, []);
+
+  const handlePortfolioClick = () => {
+    window.location.href = 'https://portfolio.cidk.site';
+  };
 
   return (
     <>
@@ -126,6 +136,26 @@ const App = () => {
       <div id="preloader">
         <div className="loading__text" ref={loadingTextRef}>LOADING</div>
       </div>
+      <button 
+        className="portfolio-button"
+        onClick={handlePortfolioClick}
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '10px 20px',
+          fontSize: '16px',
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          opacity: 0,
+        }}
+      >
+        View Portfolio
+      </button>
     </>
   );
 };
