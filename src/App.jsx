@@ -141,7 +141,6 @@ const App = () => {
       <button 
         className="portfolio-button"
         onClick={handlePortfolioClick}
-        disabled={!isButtonVisible}
         style={{
           position: 'absolute',
           bottom: '20px',
